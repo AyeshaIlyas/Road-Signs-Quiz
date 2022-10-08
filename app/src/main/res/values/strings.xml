@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">RoadSigns</string>
+    <string name="signDescription">Road Sign</string>
+    <string name="questionsCount">Question</string>
+    <string name="correctCount">Correct:</string>
+    <string name="wrongCount">Wrong:</string>
+    <string name="submit">Submit</string>
+    <string name="next">Next</string>
+    <string name="finish">Finish</string>
+    <string name="correctFeedback">Correct</string>
+    <string name="wrongFeedback">Incorrect</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

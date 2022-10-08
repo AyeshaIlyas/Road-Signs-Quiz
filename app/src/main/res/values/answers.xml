@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Answer Choices -->
+    <string name="answer1">Hill Ahead</string>
+    <string name="answer2">Merging traffic from right</string>
+    <string name="answer3">Two-way traffic ahead</string>
+    <string name="answer4">Choice 4</string>
+    <string name="answer5">Choice 5</string>
+    <string name="answer6">Choice 6</string>
+    <string name="answer7">Choice 7</string>
+    <string name="answer8">Choice 8</string>
+    <string name="answer9">Choice 9</string>
+    <string name="answer10">Choice 10</string>
+    <string name="answer11">Choice 11</string>
+    <string name="answer12">Choice 12</string>
+    <string name="answer13">Choice 13</string>
+    <string name="answer14">Choice 14</string>
+    <string name="answer15">Choice 15</string>
+
+</resources>
