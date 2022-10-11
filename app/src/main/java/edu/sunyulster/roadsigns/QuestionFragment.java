@@ -71,14 +71,16 @@ public class QuestionFragment extends Fragment implements RadioGroup.OnCheckedCh
         answerChoicesIds.add(correctAnswerId);
         for (int i = 1; i < NUMBER_OF_CHOICES; i++) {
             randomNumber = randomNumGenerator.nextInt(NUMBER_OF_SIGNS) + 1;
-            while (answerChoicesIds.contains(randomNumber)) {
+            int id = getResources().getIdentifier("answer" + randomNumber, "string", PACKAGE_NAME);
+            while (answerChoicesIds.contains(id)) {
                 randomNumber = randomNumGenerator.nextInt(NUMBER_OF_SIGNS) + 1;
+                id = getResources().getIdentifier("answer" + randomNumber, "string", PACKAGE_NAME);
             }
 
-            Log.i("QuestionFragment.java", String.valueOf(randomNumber));
+            Log.i("QuestionFragment.java", String.valueOf(id));
 
             // at this point we have a unique random number and we can get resource id for the answer
-            answerChoicesIds.add(getResources().getIdentifier("answer" + randomNumber, "string", PACKAGE_NAME));
+            answerChoicesIds.add(id);
         }
 
         // shuffle choices
