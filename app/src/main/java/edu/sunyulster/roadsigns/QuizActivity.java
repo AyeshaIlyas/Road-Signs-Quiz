@@ -9,6 +9,7 @@ import edu.sunyulster.roadsigns.databinding.ActivityQuizBinding;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.util.Log;
 
 import java.util.LinkedList;
 
@@ -29,9 +30,11 @@ public class QuizActivity extends FragmentActivity implements QuestionFragment.Q
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.i("QuizActivity.java", "onCreate just started executing");
         binding = ActivityQuizBinding.inflate(getLayoutInflater());
         // initialize instance variables
         questionCount = getIntent().getIntExtra("questionCount", 5);
+        Log.i("QuizActivity.java", "Getting extras...Extra: " + questionCount);
         currentQuestion = 1;
         correct = 0;
         wrong = 0;
@@ -69,11 +72,13 @@ public class QuizActivity extends FragmentActivity implements QuestionFragment.Q
                         binding.wrongCount.setText(getResources().getString(R.string.wrongCount) + " " + wrong);
                         binding.feedback.setText(R.string.wrongFeedback);
                         // store question information
-                        wrongSignsIds.add(currentFragment.getSignId());
-                        correctAnswers.add(currentFragment.getCorrectAnswer());
+                        Log.i("QuizActivity.java", "Before adding to outer class's LinkedLists");
+                        QuizActivity.this.wrongSignsIds.add(currentFragment.getSignId());
+                        QuizActivity.this.correctAnswers.add(currentFragment.getCorrectAnswer());
                         // chosen answer cannot be null at this point bc we know an answer has to have been chosen
                         // to activate the submit button
-                        chosenAnswers.add(currentFragment.getChosenAnswer());
+                        QuizActivity.this.chosenAnswers.add(currentFragment.getChosenAnswer());
+                        Log.i("QuizActivity.java", "After adding to outer class's LinkedLists");
                     }
                 }
             }
@@ -117,6 +122,7 @@ public class QuizActivity extends FragmentActivity implements QuestionFragment.Q
         binding.nextBtn.setEnabled(false);
 
         setContentView(binding.getRoot());
+        Log.i("QuizActivity.java", "End of onCreate");
     }
 
     @Override
