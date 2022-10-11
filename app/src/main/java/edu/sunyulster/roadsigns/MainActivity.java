@@ -72,7 +72,7 @@ public class MainActivity extends FragmentActivity implements QuestionFragment.Q
                     MainActivity.this.startActivity(intent);
                 } else {
                     if (currentQuestion == QUESTION_COUNT - 1) {
-                        binding.submitBtn.setText(R.string.finish);
+                        binding.nextBtn.setText(R.string.finish);
                     }
                     // increment question number
                     currentQuestion++;
