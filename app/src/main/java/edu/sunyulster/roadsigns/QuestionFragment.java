@@ -24,7 +24,8 @@ public class QuestionFragment extends Fragment implements RadioGroup.OnCheckedCh
     private static final int NUMBER_OF_CHOICES = 4;
     private static final String PACKAGE_NAME = "edu.sunyulster.roadsigns";
 
-    private String answerText;
+    private int signId;
+    private int correctAnswerId;
     private QuestionListener parentActivity;
 
     public QuestionFragment() {
@@ -60,11 +61,10 @@ public class QuestionFragment extends Fragment implements RadioGroup.OnCheckedCh
         Random randomNumGenerator = new Random();
         int randomNumber = randomNumGenerator.nextInt(NUMBER_OF_SIGNS) + 1;
         // get random sign and set in image view
-        int signID = getResources().getIdentifier("sign" + randomNumber, "drawable", PACKAGE_NAME);
-        binding.imageView.setImageResource(signID);
+        signId = getResources().getIdentifier("sign" + randomNumber, "drawable", PACKAGE_NAME);
+        binding.imageView.setImageResource(signId);
         // get corresponding answer
-        int correctAnswerId = getResources().getIdentifier("answer" + randomNumber, "string", PACKAGE_NAME);
-        answerText = getResources().getString(correctAnswerId);
+        correctAnswerId = getResources().getIdentifier("answer" + randomNumber, "string", PACKAGE_NAME);
 
         // get 3 other random answers that are different from each other
         ArrayList<Integer> answerChoicesIds = new ArrayList<>();
@@ -120,11 +120,30 @@ public class QuestionFragment extends Fragment implements RadioGroup.OnCheckedCh
                 RadioButton button = (RadioButton) binding.radioGroup.getChildAt(i);
                 if (button.getId() == checkedId) {
                     // check if the RadioButton's text is the same as the answerText and return true
-                    return button.getText().toString().equals(answerText);
+                    return button.getText().toString().equals(getResources().getString(correctAnswerId));
                 }
             }
         }
         // if no RadioButton is checked, return false
         return false;
     }
+
+    public int getSignId() {
+        // image id, correct answer id, chosen answer id
+        return signId;
+    }
+
+    public String getCorrectAnswer() {
+        return getResources().getString(correctAnswerId);
+    }
+
+    public String getChosenAnswer() {
+        int checkedId = binding.radioGroup.getCheckedRadioButtonId();
+        if (checkedId != -1)
+            return ((RadioButton) getActivity().findViewById(checkedId)).getText().toString();
+        return null;
+    }
+
+
+
 }

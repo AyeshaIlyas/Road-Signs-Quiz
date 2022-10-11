@@ -9,6 +9,15 @@
     <string name="finish">Finish</string>
     <string name="correctFeedback">Correct</string>
     <string name="wrongFeedback">Incorrect</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="completionMsg">Road Signs Quiz Completed</string>
+    <string name="Home">HOME</string>
+    <string name="title_activity_home">Home</string>
+
+    <string name="signs">Signs</string>
+    <string name="road">Road</string>
+    <string name="quiz">Quiz</string>
+    <string name="number_of_questions">How many question would you like?</string>
+    <string name="start">Start</string>
+    <string name="defaultQuestionCount">5</string>
 </resources>

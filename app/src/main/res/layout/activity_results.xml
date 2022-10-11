@@ -2,18 +2,101 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/contraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ResultsActivity">
+    tools:context=".ResultsActivity"
+    tools:ignore="SpeakableTextPresentCheck">
 
     <TextView
-        android:id="@+id/results"
+        android:id="@+id/completedMsg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Results"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display4"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="30dp"
+        android:text="@string/completionMsg"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/completedMsg"
+        tools:text="Score: 100%" />
+
+    <Button
+        android:id="@+id/homeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#03A9F4"
+        android:text="@string/Home"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wrongContainer"
+        tools:ignore="TextContrastCheck" />
+
+    <LinearLayout
+        android:id="@+id/correctContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/score">
+
+        <ImageView
+            android:id="@+id/check"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="check"
+            app:srcCompat="@drawable/check"
+            tools:ignore="ImageContrastCheck" />
+
+        <TextView
+            android:id="@+id/correct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            tools:text="Correct: 3/3" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/wrongContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/correctContainer">
+
+        <ImageView
+            android:id="@+id/xMark"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="x"
+            app:srcCompat="@drawable/x_mark" />
+
+        <TextView
+            android:id="@+id/wrong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            tools:text="Wrong: 0/3" />
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

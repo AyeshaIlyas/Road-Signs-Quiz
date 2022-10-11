@@ -4,30 +4,41 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import edu.sunyulster.roadsigns.databinding.ActivityMainBinding;
+import edu.sunyulster.roadsigns.databinding.ActivityQuizBinding;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class MainActivity extends FragmentActivity implements QuestionFragment.QuestionListener {
-    private ActivityMainBinding binding;
+import java.util.LinkedList;
+
+public class QuizActivity extends FragmentActivity implements QuestionFragment.QuestionListener {
+    private ActivityQuizBinding binding;
     private FragmentManager fragmentManager;
 
-    private final int QUESTION_COUNT = 3;
+    private int questionCount;
     private int currentQuestion;
     private int correct;
     private int wrong;
+
+    private LinkedList<Integer> wrongSignsIds;
+    private LinkedList<String> correctAnswers;
+    private LinkedList<String> chosenAnswers;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        binding = ActivityQuizBinding.inflate(getLayoutInflater());
         // initialize instance variables
+        questionCount = getIntent().getIntExtra("questionCount", 5);
         currentQuestion = 1;
         correct = 0;
         wrong = 0;
+
+        wrongSignsIds = new LinkedList<>();
+        correctAnswers = new LinkedList<>();
+        chosenAnswers = new LinkedList<>();
 
         // add fragment
         QuestionFragment questionFragment = QuestionFragment.newInstance();
@@ -37,7 +48,7 @@ public class MainActivity extends FragmentActivity implements QuestionFragment.Q
         transaction.add(R.id.fragmentContainer, questionFragment).commit();
 
         // update GUI with default values
-        binding.questionsCount.setText(getResources().getString(R.string.questionsCount) + " " + currentQuestion + "/" + QUESTION_COUNT);
+        binding.questionsCount.setText(getResources().getString(R.string.questionsCount) + " " + currentQuestion + "/" + questionCount);
         binding.correctCount.setText(getResources().getString(R.string.correctCount) + " " + correct);
         binding.wrongCount.setText(getResources().getString(R.string.wrongCount) + " " + wrong);
 
@@ -57,6 +68,12 @@ public class MainActivity extends FragmentActivity implements QuestionFragment.Q
                         wrong++;
                         binding.wrongCount.setText(getResources().getString(R.string.wrongCount) + " " + wrong);
                         binding.feedback.setText(R.string.wrongFeedback);
+                        // store question information
+                        wrongSignsIds.add(currentFragment.getSignId());
+                        correctAnswers.add(currentFragment.getCorrectAnswer());
+                        // chosen answer cannot be null at this point bc we know an answer has to have been chosen
+                        // to activate the submit button
+                        chosenAnswers.add(currentFragment.getChosenAnswer());
                     }
                 }
             }
@@ -66,17 +83,18 @@ public class MainActivity extends FragmentActivity implements QuestionFragment.Q
         binding.nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (currentQuestion == QUESTION_COUNT) {
-                    Intent intent = new Intent(MainActivity.this, ResultsActivity.class);
+                if (currentQuestion == questionCount) {
+                    Intent intent = new Intent(QuizActivity.this, ResultsActivity.class);
                     intent.putExtra("correct", correct);
-                    MainActivity.this.startActivity(intent);
+                    intent.putExtra("wrong", wrong);
+                    QuizActivity.this.startActivity(intent);
                 } else {
-                    if (currentQuestion == QUESTION_COUNT - 1) {
+                    if (currentQuestion == questionCount - 1) {
                         binding.nextBtn.setText(R.string.finish);
                     }
                     // increment question number
                     currentQuestion++;
-                    binding.questionsCount.setText(getResources().getString(R.string.questionsCount) + " " + currentQuestion + "/" + QUESTION_COUNT);
+                    binding.questionsCount.setText(getResources().getString(R.string.questionsCount) + " " + currentQuestion + "/" + questionCount);
                     // clear feedback text
                     binding.feedback.setText("");
                     // disable buttons

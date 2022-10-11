@@ -4,9 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_results.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_question.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_home.xml" value="0.272479248046875" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.20930175781250002" />
+        <entry key="app/src/main/res/layout/activity_quiz.xml" value="0.19605263157894737" />
+        <entry key="app/src/main/res/layout/activity_results.xml" value="0.33501892089843754" />
+        <entry key="app/src/main/res/layout/fragment_question.xml" value="0.188824462890625" />
       </map>
     </option>
   </component>
@@ -15,5 +17,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.1" />
+      </ProjectState>
+    </option>
   </component>
 </project>

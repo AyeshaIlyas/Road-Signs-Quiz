@@ -2,10 +2,10 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/scrollView"
+    android:id="@+id/contraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".QuizActivity"
     tools:ignore="SpeakableTextPresentCheck">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,7 +16,9 @@
             android:id="@+id/statsContainer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="30dp"
+            android:layout_marginEnd="16dp"
             android:gravity="start"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
@@ -75,7 +77,9 @@
             android:id="@+id/buttonContainer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="36dp"
+            android:layout_marginEnd="16dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -85,15 +89,16 @@
                 android:id="@+id/submitBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/submit"
+                android:backgroundTint="#03A9F4"
 
-                />
+                android:text="@string/submit" />
 
             <Button
                 android:id="@+id/nextBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
+                android:backgroundTint="#03A9F4"
                 android:text="@string/next" />
         </LinearLayout>
 
@@ -106,7 +111,7 @@
             android:layout_marginEnd="40dp"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            android:textSize="16sp"
+            android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
