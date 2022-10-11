@@ -19,9 +19,12 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String input = binding.input.getText().toString();
-                int questionCount = input.strip().length() == 0 ?
-                        Integer.parseInt(getResources().getString(R.string.defaultQuestionCount))
-                        : Integer.parseInt(input);
+                int questionCount;
+                if (input.strip().length() == 0 || Integer.parseInt(input) <= 0) 
+                    questionCount = Integer.parseInt(getResources().getString(R.string.defaultQuestionCount);
+                else 
+                    questionCount = Integer.parseInt(input);
+
                 Intent intent = new Intent(HomeActivity.this, QuizActivity.class);
                 intent.putExtra("questionCount", questionCount);
                 HomeActivity.this.startActivity(intent);
