@@ -22,7 +22,7 @@ public class HomeActivity extends AppCompatActivity {
                 Log.i("HomeActivity.java", "Start button clicked");
                 String input = binding.input.getText().toString();
                 int questionCount;
-                if (input.strip().length() == 0 || Integer.parseInt(input) <= 0) 
+                if (input.trim().length() == 0 || Integer.parseInt(input) <= 0) 
                     questionCount = Integer.parseInt(getResources().getString(R.string.defaultQuestionCount));
                 else 
                     questionCount = Integer.parseInt(input);
