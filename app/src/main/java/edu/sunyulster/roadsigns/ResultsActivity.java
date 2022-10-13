@@ -20,7 +20,7 @@ public class ResultsActivity extends AppCompatActivity {
         int correct = intent.getIntExtra("correct" , 0);
         int wrong = intent.getIntExtra("wrong", 0);
         int total = correct + wrong;
-        binding.score.setText("Score: " + (correct / total) + "%");
+        binding.score.setText("Score: " + ((double) correct / total) + "%");
         binding.correct.setText(String.format("Correct: %d/%d", correct, total));
         binding.wrong.setText(String.format("Wrong: %d/%d", wrong, total));
 
