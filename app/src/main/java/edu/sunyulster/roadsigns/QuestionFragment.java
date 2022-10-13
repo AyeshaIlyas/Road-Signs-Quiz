@@ -100,7 +100,7 @@ public class QuestionFragment extends Fragment implements RadioGroup.OnCheckedCh
 //         }
         
           // TESTING PURPOSES
-        binding.radioGroup.getChildAt(0)).setText(correctAnswerId);
+        ((RadioButton) binding.radioGroup.getChildAt(0)).setText(correctAnswerId);
         for (int i = 1; i < NUMBER_OF_CHOICES; i++) {
             ((RadioButton) binding.radioGroup.getChildAt(i)).setText(getResources().getIdentifier("answer" + i, "string", PACKAGE_NAME));
         }
