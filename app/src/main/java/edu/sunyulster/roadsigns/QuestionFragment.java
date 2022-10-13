@@ -20,7 +20,7 @@ import edu.sunyulster.roadsigns.databinding.FragmentQuestionBinding;
 public class QuestionFragment extends Fragment implements RadioGroup.OnCheckedChangeListener {
     private FragmentQuestionBinding binding;
 
-    private static final int NUMBER_OF_SIGNS = 3;
+    private static final int NUMBER_OF_SIGNS = 10;
     private static final int NUMBER_OF_CHOICES = 4;
     private static final String PACKAGE_NAME = "edu.sunyulster.roadsigns";
 
