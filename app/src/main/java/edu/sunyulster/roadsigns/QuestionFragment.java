@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,7 +17,7 @@ import java.util.Random;
 
 import edu.sunyulster.roadsigns.databinding.FragmentQuestionBinding;
 
-public class QuestionFragment extends Fragment implements RadioGroup.OnCheckedChangeListener {
+public class QuestionFragment extends Fragment implements RadioGroup.OnCheckedChangeListener, View.OnLongClickListener {
     private FragmentQuestionBinding binding;
 
     private static final int NUMBER_OF_SIGNS = 10;
@@ -54,7 +54,6 @@ public class QuestionFragment extends Fragment implements RadioGroup.OnCheckedCh
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.i("QuestionFragment.java", "starting onCreateView");
         // Inflate the layout for this fragment
         binding =  FragmentQuestionBinding.inflate(inflater, container, false);
 
@@ -64,56 +63,42 @@ public class QuestionFragment extends Fragment implements RadioGroup.OnCheckedCh
         // get random sign and set in image view
         signId = getResources().getIdentifier("sign" + randomNumber, "drawable", PACKAGE_NAME);
         binding.imageView.setImageResource(signId);
+        binding.imageView.setOnLongClickListener(this);
         // get corresponding answer
         correctAnswerId = getResources().getIdentifier("answer" + randomNumber, "string", PACKAGE_NAME);
 
-        Log.i("QuestionFragment.java", "correctAnswer: " + getResources().getString(correctAnswerId));
-        
         // get 3 other random answers that are different from each other
-//         ArrayList<Integer> answerChoicesIds = new ArrayList<>();
-//         answerChoicesIds.add(correctAnswerId);
-//         for (int i = 1; i < NUMBER_OF_CHOICES; i++) {
-//             Log.i("QuestionFragment.java", i + " iteration of the loop");
-//             randomNumber = randomNumGenerator.nextInt(NUMBER_OF_SIGNS) + 1;
-//             int id = getResources().getIdentifier("answer" + randomNumber, "string", PACKAGE_NAME);
-//             Log.i("QuestionFragment.java", "randomNumber generated: " + randomNumber + " AND " + "id: " + id);
-//             while (answerChoicesIds.contains(id)) {
-//                 randomNumber = randomNumGenerator.nextInt(NUMBER_OF_SIGNS) + 1;
-//                 id = getResources().getIdentifier("answer" + randomNumber, "string", PACKAGE_NAME);
-//                 Log.i("QuestionFragment.java", "randomNumber generated: " + randomNumber + " AND " + "id: " + id);
-//             }
+         ArrayList<Integer> answerChoicesIds = new ArrayList<>();
+         answerChoicesIds.add(correctAnswerId);
+         for (int i = 1; i < NUMBER_OF_CHOICES; i++) {
+             randomNumber = randomNumGenerator.nextInt(NUMBER_OF_SIGNS) + 1;
+             int id = getResources().getIdentifier("answer" + randomNumber, "string", PACKAGE_NAME);
+             while (answerChoicesIds.contains(id)) {
+                 randomNumber = randomNumGenerator.nextInt(NUMBER_OF_SIGNS) + 1;
+                 id = getResources().getIdentifier("answer" + randomNumber, "string", PACKAGE_NAME);
+             }
+             // at this point we have resource id for a unique answer choice
+             answerChoicesIds.add(id);
+         }
 
-//             Log.i("QuestionFragment.java", "Final ID" i + ": " + String.valueOf(id));
+         // shuffle choices
+         Collections.shuffle(answerChoicesIds);
 
-//             // at this point we have resource id for a unique answer choice
-//             answerChoicesIds.add(id);
-//         }
-
-//         // shuffle choices
-//         Collections.shuffle(answerChoicesIds);
-
-//         Log.i("QuestionFragment.java", answerChoicesIds.toString());
-
-//         // assign an answer to each radio button
-//         for (int i = 0; i < NUMBER_OF_CHOICES; i++) {
-//             ((RadioButton) binding.radioGroup.getChildAt(i)).setText(answerChoicesIds.get(i));
-//         }
-        
-          // TESTING PURPOSES
-        ((RadioButton) binding.radioGroup.getChildAt(0)).setText(correctAnswerId);
-        for (int i = 1; i < NUMBER_OF_CHOICES; i++) {
-            ((RadioButton) binding.radioGroup.getChildAt(i)).setText(getResources().getIdentifier("answer" + i, "string", PACKAGE_NAME));
-        }
-
-        // assign an answer to each radio button
-        for (int i = 0; i < NUMBER_OF_CHOICES; i++) {
-            Log.i("QuestionFragment.java", ((RadioButton) binding.radioGroup.getChildAt(i)).getText().toString());
-        }
+         // assign an answer to each radio button
+         for (int i = 0; i < NUMBER_OF_CHOICES; i++) {
+             ((RadioButton) binding.radioGroup.getChildAt(i)).setText(answerChoicesIds.get(i));
+         }
 
         // set listener on radioGroup
         binding.radioGroup.setOnCheckedChangeListener(this);
 
         return binding.getRoot();
+    }
+
+    @Override
+    public boolean onLongClick(View view) {
+        Toast.makeText(getActivity(), correctAnswerId, Toast.LENGTH_LONG).show();
+        return true;
     }
 
     @Override
